@@ -7,6 +7,7 @@
 
 import { stdout } from 'process'
 import * as readline from 'readline'
+import readlineSync from 'readline-sync'
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -538,17 +539,50 @@ const tarotDeck = {
     stdout.cursorTo(Math.floor((this.settings.terminalWidth / 2) - (lineOmnissiah.length / 2)), 4)
     stdout.write(lineOmnissiah + '\n')
     console.log(this.horisontalLine())
+  },
+
+  /**
+   * Get a commandstring from user.
+   *
+   * @returns {string} - inputLine
+   */
+  getCommand () {
+    const inputLine = readlineSync.question('Enter selected command function (card of the day, three card spread, settings, exit)? ')
+    return inputLine
   }
 }
 
+
 /**
- * The programs mainfunction.
+ * The programs main-function.
  */
 function main () {
   console.clear()
   tarotDeck.applySettings()
   tarotDeck.displayHeader()
-  tarotDeck.getCommand()
+
+  let commandLine = tarotDeck.getCommand()
+  while (commandLine !== 'exit') {
+    console.clear()
+    tarotDeck.applySettings()
+    tarotDeck.displayHeader()
+    if (commandLine.toLowerCase === 'card of the day') {
+      tarotDeck.displayCardOfTheDay()
+    }
+    if (commandLine.toLowerCase === 'three card standard') {
+      tarotDeck.displayThreeCardSpread()
+    }
+
+    if (commandLine.toLowerCase === 'settings') {
+      tarotDeck.editSettings()
+    }
+    commandLine = tarotDeck.getCommand()
+  }
+
+  const exitBlessing = '++ May the machinespirit process your code true and your functions be pure. ++'
+  console.log()
+  readline.moveCursor(stdout, Math.ceil((tarotDeck.settings.terminalWidth / 2) - (exitBlessing.length / 2)), 2)
+  console.info(exitBlessing)
 
   // at end of program return console settings to normal
   console.log('\x1b[0m')
