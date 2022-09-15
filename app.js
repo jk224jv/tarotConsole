@@ -414,7 +414,7 @@ const tarotDeck = {
 
        },
 
-       minorNames:{
+       minorNames:{ // 
               1: 'Ace',
               2: 'Two',
               3: 'Three',
@@ -458,13 +458,18 @@ const tarotDeck = {
               20: 'The Sun',
               21: 'Judgement',
               22: 'The Great Work'
+       },
+       pulledCards: [],
+
+       pullCards(cardsToPull) {
+              this.pulledCards = []
+              for (i = 0; i < cardsToPull; i++)
+                     this.pulledCards.push(Math.floor(Math.random() * 78) + 1)
+              return this.pulledCards
+       }
+               
        }
 
-}
-
-// 4 suits 1-10 + page + knight + queen + King
-// 16 Major arcana
-
+       console.log (tarotDeck.pullCards(3))
 // create method to "scramble the deck and pull 3"
-
 // create method to display the "table and the choosen cards"
