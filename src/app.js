@@ -549,6 +549,7 @@ const tarotDeck = {
    */
   getCommand (question) {
     const inputLine = readlineSync.question(question)
+    console.log(inputLine)
     return inputLine
   },
 
@@ -557,29 +558,31 @@ const tarotDeck = {
    * Sets setting to default if input is incorrect.
    */
   editSettings () {
-    let isValid = ['1', '2', '3', '4', '5', '6', '7']
+    let correctInputs = ['1', '2', '3', '4', '5', '6', '7']
     const newBGColor = this.getCommand('Select new Background color : 0 = Black, 1 = Red, 2 = Green, 3 = Yellow, 4 = Blue, 5 = Magenta, 6 = Cyan, 7 = White.\n')
-    if (isValid.includes[newBGColor]) {
+    if (correctInputs.includes(newBGColor)) {
+      console.log('test')
       this.settings.backgroundColor = newBGColor
     } else {
       this.settings.backgroundColor = this.settings.default.backgroundColor
     }
 
     const newTextColor = this.getCommand('Select new Text color : 0 = Black, 1 = Red, 2 = Green, 3 = Yellow, 4 = Blue, 5 = Magenta, 6 = Cyan, 7 = White.\n')
-    if (isValid.includes[newTextColor]) {
+    if (correctInputs.includes(newTextColor)) {
+      console.log('test')
       this.settings.textColor = newTextColor
     } else {
       this.settings.textColor = this.settings.default.textColor
     }
 
-    isValid = ['0', '1']
+    correctInputs = ['0', '1']
     const newTextBrightness = this.getCommand('Select new Text Brightness : 0 = Bright, 1 = Dim.\n')
-    if (isValid.includes(newTextBrightness)) {
+    if (correctInputs.includes(newTextBrightness)) {
+      console.log('test')
       this.settings.textBrightness = newTextBrightness
     } else {
       this.settings.textBrightness = this.settings.default.textBrightness
     }
-
     this.applySettings()
     console.clear()
     this.displayHeader()
