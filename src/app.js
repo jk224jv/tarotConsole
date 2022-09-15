@@ -550,6 +550,39 @@ const tarotDeck = {
   getCommand (question) {
     const inputLine = readlineSync.question(question)
     return inputLine
+  },
+
+  /**
+   * Eddits the settings according to user input.
+   * Sets setting to default if input is incorrect.
+   */
+  editSettings () {
+    let isValid = ['1', '2', '3', '4', '5', '6', '7']
+    const newBGColor = this.getCommand('Select new Background color : 0 = Black, 1 = Red, 2 = Green, 3 = Yellow, 4 = Blue, 5 = Magenta, 6 = Cyan, 7 = White.\n')
+    if (isValid.includes[newBGColor]) {
+      this.settings.backgroundColor = newBGColor
+    } else {
+      this.settings.backgroundColor = this.settings.default.backgroundColor
+    }
+
+    const newTextColor = this.getCommand('Select new Text color : 0 = Black, 1 = Red, 2 = Green, 3 = Yellow, 4 = Blue, 5 = Magenta, 6 = Cyan, 7 = White.\n')
+    if (isValid.includes[newTextColor]) {
+      this.settings.textColor = newTextColor
+    } else {
+      this.settings.textColor = this.settings.default.textColor
+    }
+
+    isValid = ['0', '1']
+    const newTextBrightness = this.getCommand('Select new Text Brightness : 0 = Bright, 1 = Dim.\n')
+    if (isValid.includes(newTextBrightness)) {
+      this.settings.textBrightness = newTextBrightness
+    } else {
+      this.settings.textBrightness = this.settings.default.textBrightness
+    }
+
+    this.applySettings()
+    console.clear()
+    this.displayHeader()
   }
 }
 
@@ -566,17 +599,17 @@ function main () {
     console.clear()
     tarotDeck.applySettings()
     tarotDeck.displayHeader()
-    if (commandLine.toLowerCase === 'card of the day' || commandLine.toLowerCase === '1') {
+    if (commandLine.toLowerCase === 'card of the day' || commandLine === '1') {
       tarotDeck.displayCardOfTheDay()
     }
-    if (commandLine.toLowerCase === 'three card standard' || commandLine.toLowerCase === '2') {
+    if (commandLine.toLowerCase === 'three card standard' || commandLine === '2') {
       tarotDeck.displayThreeCardSpread()
     }
 
-    if (commandLine.toLowerCase === 'settings' || commandLine.toLowerCase === '3') {
+    if (commandLine.toLowerCase === 'settings' || commandLine === '3') {
       tarotDeck.editSettings()
     }
-    commandLine = tarotDeck.getCommand('Enter selected command function (1:card of the day, 2:three card spread, 3:settings, 4:exit)?')
+    commandLine = tarotDeck.getCommand('Enter selected command function (1:card of the day, 2:three card spread, 3:settings, 4:exit)?\n')
   }
 
   const exitBlessing = '++ May the machinespirit process your code true and your functions be pure. ++'
