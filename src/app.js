@@ -544,14 +544,14 @@ const tarotDeck = {
   /**
    * Get a commandstring from user.
    *
-   * @returns {string} - inputLine
+   * @param {string} question - a messege string.
+   * @returns {string} inputLine - returnstring.
    */
-  getCommand () {
-    const inputLine = readlineSync.question('Enter selected command function (card of the day, three card spread, settings, exit)? ')
+  getCommand (question) {
+    const inputLine = readlineSync.question(question)
     return inputLine
   }
 }
-
 
 /**
  * The programs main-function.
@@ -561,22 +561,22 @@ function main () {
   tarotDeck.applySettings()
   tarotDeck.displayHeader()
 
-  let commandLine = tarotDeck.getCommand()
-  while (commandLine !== 'exit') {
+  let commandLine = ''
+  while (commandLine.toLowerCase !== 'exit' && commandLine !== '4') {
     console.clear()
     tarotDeck.applySettings()
     tarotDeck.displayHeader()
-    if (commandLine.toLowerCase === 'card of the day') {
+    if (commandLine.toLowerCase === 'card of the day' || commandLine.toLowerCase === '1') {
       tarotDeck.displayCardOfTheDay()
     }
-    if (commandLine.toLowerCase === 'three card standard') {
+    if (commandLine.toLowerCase === 'three card standard' || commandLine.toLowerCase === '2') {
       tarotDeck.displayThreeCardSpread()
     }
 
-    if (commandLine.toLowerCase === 'settings') {
+    if (commandLine.toLowerCase === 'settings' || commandLine.toLowerCase === '3') {
       tarotDeck.editSettings()
     }
-    commandLine = tarotDeck.getCommand()
+    commandLine = tarotDeck.getCommand('Enter selected command function (1:card of the day, 2:three card spread, 3:settings, 4:exit)?')
   }
 
   const exitBlessing = '++ May the machinespirit process your code true and your functions be pure. ++'
