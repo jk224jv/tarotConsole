@@ -1,0 +1,24 @@
+{
+  "name": "the_omnissiahs_tarot",
+  "version": "1.0.0",
+  "description": "The Omnissiahs tarot",
+  "type": "module",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "lint": "npx eslint ./src || exit 0",
+    "lint:fix": "npx eslint ./src --fix || exit 0"
+  },
+  "contributors": [
+    "Jimmy Karlsson <jk224jv@student.lnu.se>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "@lnu/eslint-config": "^1.1.5",
+    "jest": "^28.1.1"
+  },
+  "dependencies": {
+    "readline": "^1.3.0"
+  }
+}
