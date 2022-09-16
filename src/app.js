@@ -20,17 +20,14 @@ const tarotDeck = {
     backgroundColor: '0', // 0 = Black, 1 = Red, 2 = Green, 3 = Yellow, 4 = Blue, 5 = Magenta, 6 = Cyan, 7 = White.
     textColor: '2', // 0 = Black, 1 = Red, 2 = Green, 3 = Yellow, 4 = Blue, 5 = Magenta, 6 = Cyan, 7 = White.
     textBrightness: '0', // 0 = Bright, 1 = Dim.
-    cardsWidth: 25, // must be odd intiger <== 33. Default = 25
-    cardsHeight: 37, // must be odd initger <== 37. Default = 37
-    terminalWidth: 0,
-    terminalHeight: 0,
+    cardsWidth: 33, // must be odd intiger <== 33. Hardcoded only! Default = 33
+    cardsHeight: 37, // must be odd initger <== 37. Hardcoded only! Default = 37
+    terminalWidth: 0, // DO NOT MODIFY! applied by program at launch. DO NOT MODIFY!
+    terminalHeight: 0, // DO NOT MODIFY! applied by program at launch. DO NOT MODIFY!
     default: {
-      backgroundColor: '0',
-      textColor: '2',
-      textBrightness: '0',
-      cardsWidth: 11,
-      cardsHeight: 17
-
+      backgroundColor: '0', // DO NOT MODIFY!
+      textColor: '2', // DO NOT MODIFY!
+      textBrightness: '0' // DO NOT MODIFY!
     }
   },
 
@@ -710,7 +707,7 @@ const tarotDeck = {
    * @param {number} y - TopLeft corner of card.
    * @param {number} pulledCard - selects what card to write out.
    */
-  writeCardContent(x, y, pulledCard) {
+  writeCardContent (x, y, pulledCard) {
     let cardSuit = ''
     let card = 0
     if (pulledCard >= 1 && pulledCard <= 14) { // is the random card from rods?
@@ -746,9 +743,13 @@ const tarotDeck = {
     this.writeCardFrame(x, y)
     this.writeCardContent(x, y, pulledCard)
   },
-
-  displayCardOfTheDay() {
-    this.writeCard(10, 10)
+  /**
+   * Writes one random card centerscreen.
+   *
+   */
+  displayCardOfTheDay () {
+    this.pullCards(1)
+    this.writeCard(Math.floor((this.settings.terminalWidth - this.settings.cardsWidth) / 2), 10, this.pulledCards[0])
   }
 }
 
