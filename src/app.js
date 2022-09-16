@@ -20,8 +20,8 @@ const tarotDeck = {
     backgroundColor: '0', // 0 = Black, 1 = Red, 2 = Green, 3 = Yellow, 4 = Blue, 5 = Magenta, 6 = Cyan, 7 = White.
     textColor: '2', // 0 = Black, 1 = Red, 2 = Green, 3 = Yellow, 4 = Blue, 5 = Magenta, 6 = Cyan, 7 = White.
     textBrightness: '0', // 0 = Bright, 1 = Dim.
-    cardsWidth: 11, // must be odd intiger <== 33. Default = 33
-    cardsHeight: 17, // must be odd initger <== 37. Default = 17
+    cardsWidth: 25, // must be odd intiger <== 33. Default = 25
+    cardsHeight: 37, // must be odd initger <== 37. Default = 37
     terminalWidth: 0,
     terminalHeight: 0,
     default: {
@@ -31,6 +31,79 @@ const tarotDeck = {
       cardsWidth: 11,
       cardsHeight: 17
 
+    }
+  },
+
+  cardsTemplate: {
+    1: {
+      top: '',
+      center: 'x',
+      bottom: ''
+    },
+    2: {
+      top: 'x',
+      center: '',
+      bottom: 'x'
+    },
+    3: {
+      top: 'x',
+      center: 'x',
+      bottom: 'x'
+    },
+    4: {
+      top: 'x x',
+      center: '',
+      bottom: 'x x'
+    },
+    5: {
+      top: 'x x',
+      center: 'x',
+      bottom: 'x x'
+    },
+    6: {
+      top: 'x x',
+      center: 'x x',
+      bottom: 'x x'
+    },
+    7: {
+      top: 'x x x',
+      center: 'x',
+      bottom: 'x x x'
+    },
+    8: {
+      top: 'x x x',
+      center: 'x x',
+      bottom: 'x x x'
+    },
+    9: {
+      top: 'x x x',
+      center: 'x x x',
+      bottom: 'x x x'
+    },
+    10: {
+      top: 'x x x x',
+      center: 'x x',
+      bottom: 'x x x x'
+    },
+    11: {
+      top: 'x',
+      center: 'Page',
+      bottom: 'x'
+    },
+    12: {
+      top: 'x',
+      center: 'Knight',
+      bottom: 'x'
+    },
+    13: {
+      top: 'x',
+      center: 'Queen',
+      bottom: 'x'
+    },
+    14: {
+      top: 'x',
+      center: 'King',
+      bottom: 'x'
     }
   },
 
@@ -252,7 +325,7 @@ const tarotDeck = {
 
   },
 
-  blades: { // minor arcana = Swords. Cards 33 - 56
+  blades: { // minor arcana = Swords. Cards 43 - 56
     1: {
       upright: 'Breakthrough, clarity, sharp mind',
       reversed: 'Confusion, brutality, chaos'
@@ -548,6 +621,7 @@ const tarotDeck = {
    * @returns {string} inputLine - returnstring.
    */
   getCommand (question) {
+    stdout.cursorTo(0, this.settings.terminalHeight)
     const inputLine = readlineSync.question(question)
     console.log(inputLine)
     return inputLine
@@ -586,6 +660,95 @@ const tarotDeck = {
     this.applySettings()
     console.clear()
     this.displayHeader()
+  },
+  /**
+   * Displays exit dialog.
+   *
+   */
+  displayExitBlessing () {
+    const exitBlessing = '++ May the machinespirit process your code true and your functions be pure. ++'
+    console.log()
+    readline.moveCursor(stdout, Math.ceil((tarotDeck.settings.terminalWidth / 2) - (exitBlessing.length / 2)), 2)
+    console.info(exitBlessing)
+
+    // at end of program return console settings to normal
+    console.log('\x1b[0m')
+    rl.close()
+  },
+  /**
+   * Write a tarot card outer frame at cordinates.
+   *
+   * @param {number} x - x TopLeft corner of card.
+   * @param {number} y - y TopLeft corner of card.
+   */
+  writeCardFrame (x, y) {
+    let cardTop = '╔'
+    cardTop = cardTop.padEnd(this.settings.cardsWidth, '═') + '╗\n'
+
+    let cardBottom = '╚'
+    cardBottom = cardBottom.padEnd(this.settings.cardsWidth, '═') + '╝'
+
+    let cardLine = '║'
+    cardLine = cardLine.padEnd(this.settings.cardsWidth, ' ') + '║░'
+
+    stdout.write(cardTop)
+    stdout.cursorTo(x, (y + 1))
+    for (let i = 1; i < this.settings.cardsHeight; i++) {
+      stdout.write(cardLine)
+      stdout.cursorTo(x, (y + i))
+    }
+    stdout.write(cardBottom + '░')
+    stdout.cursorTo((x + 2), (y + this.settings.cardsHeight))
+
+    const cardShade = '░'.repeat(this.settings.cardsWidth)
+    stdout.write(cardShade)
+  },
+  /**
+   * Write a tarot card content at cordinates.
+   *
+   * @param {number} x - TopLeft corner of card.
+   * @param {number} y - TopLeft corner of card.
+   * @param {number} pulledCard - selects what card to write out.
+   */
+  writeCardContent(x, y, pulledCard) {
+    let cardSuit = ''
+    let card = 0
+    if (pulledCard >= 1 && pulledCard <= 14) { // is the random card from rods?
+      cardSuit = '|'
+      card = pulledCard
+    }
+
+    if (pulledCard >= 15 && pulledCard <= 28) { // is the random card from cogs?
+      cardSuit = '☼'
+      card = pulledCard % 14
+    }
+
+    if (pulledCard >= 29 && pulledCard <= 42) { // is the random card from sharp?
+      cardSuit = '#'
+      card = pulledCard % 14
+    }
+
+    if (pulledCard >= 43 && pulledCard <= 56) { // is the random card from blades?
+      cardSuit = '/'
+      card = pulledCard % 14
+    }
+  },
+
+  /**
+   * Write a tarot card at cordinates.
+   *
+   * @param {number} x - x TopLeft corner of card
+   * @param {number} y - y TopLeft corner of card
+   * @param {number} pulledCard - selects what card to write out.
+   */
+  writeCard (x, y, pulledCard) {
+    stdout.cursorTo(x, y)
+    this.writeCardFrame(x, y)
+    this.writeCardContent(x, y, pulledCard)
+  },
+
+  displayCardOfTheDay() {
+    this.writeCard(10, 10)
   }
 }
 
@@ -615,14 +778,7 @@ function main () {
     commandLine = tarotDeck.getCommand('Enter selected command function (1:card of the day, 2:three card spread, 3:settings, 4:exit)?\n')
   }
 
-  const exitBlessing = '++ May the machinespirit process your code true and your functions be pure. ++'
-  console.log()
-  readline.moveCursor(stdout, Math.ceil((tarotDeck.settings.terminalWidth / 2) - (exitBlessing.length / 2)), 2)
-  console.info(exitBlessing)
-
-  // at end of program return console settings to normal
-  console.log('\x1b[0m')
-  rl.close()
+  tarotDeck.displayExitBlessing()
 }
 
 main()
