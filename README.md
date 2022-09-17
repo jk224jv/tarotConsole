@@ -1,5 +1,6 @@
 # the Omnissiah´s tarot
 
+<img src="screenshot.png">
 
 ## a Training with using objects
 As a practice with the use of objects in javascript I have written this terminal based tarotreader.
