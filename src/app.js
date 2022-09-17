@@ -32,6 +32,15 @@ const tarotDeck = {
   },
 
   cardsTemplate: {
+    Major: {
+      top: '',
+      center: '',
+      bottom: '',
+      special1: '   ▲   ',
+      special2: '◄  ☼  ►',
+      special3: '   ▼   '
+    },
+
     1: {
       top: '',
       center: 'x',
@@ -396,112 +405,134 @@ const tarotDeck = {
   },
 
   majorArcana: { // major arcana. Cards 57 - 78
-    1: { // The Fool
+    1: {
+      name: 'The Fool',
       upright: 'Innocence, new beginnings, free spirit',
       reversed: 'Recklessness, taken advantage of, inconsideration'
     },
 
-    2: { // The Magician
+    2: {
+      name: 'The Magician',
       upright: 'Willpower, desire, creation, manifestation',
       reversed: 'Trickery, illusions, out of touch'
     },
 
-    3: { // The Hight Priestess
+    3: {
+      name: 'The Hight Priestess',
       upright: 'Intuitive, unconscious, inner voice',
       reversed: 'Lack of center, lost inner voice, repressed feelings'
     },
 
-    4: { // The Empress
+    4: {
+      name: 'The Empress',
       upright: 'Motherhood, fertility, nature',
       reversed: 'Dependence, smothering, emptiness, nosiness'
     },
 
-    5: { // The Emperor
+    5: {
+      name: 'The Emperor',
       upright: 'Authority, structure, control, fatherhood',
       reversed: 'Tyranny, rigidity, coldness'
     },
 
-    6: { // The High Priest
+    6: {
+      name: 'The High Priest',
       upright: 'Tradition, conformity, morality, ethics',
       reversed: 'Rebellion, subversiveness, new approache'
     },
 
-    7: { // The Lovers
+    7: {
+      name: 'The Lovers',
       upright: 'Partnerships, duality, union',
       reversed: 'Loss of balance, one-sidedness, disharmony'
     },
 
-    8: { // The Chariot
+    8: {
+      name: 'The Chariot',
       upright: 'Direction, control, willpower',
       reversed: 'Lack of control, lack of direction, aggression'
     },
 
-    9: { // Strength
+    9: {
+      name: 'Strength',
       upright: 'Inner strength, bravery, compassion, focus',
       reversed: 'Self doubt, weakness, insecurity'
     },
 
-    10: { // The Hermit
+    10: {
+      name: 'The Hermit',
       upright: 'Contemplation, search for truth, inner guidance',
       reversed: 'Loneliness, isolation, lost your way'
     },
 
-    11: { // The Wheel of fortune
+    11: {
+      name: 'The Wheel of fortune',
       upright: 'Change, cycles, inevitable fate',
       reversed: 'No control, clinging to control, bad luck'
     },
 
-    12: { // Justice
+    12: {
+      name: 'Justice',
       upright: 'Cause and effect, clarity, truth',
       reversed: 'Dishonesty, unaccountability, unfairness'
     },
 
-    13: { // The Hanged Man
+    13: {
+      name: 'The Hanged Man',
       upright: 'Waiting, sacrifice, release, martyrdom',
       reversed: 'Stalling, needless sacrifice, fear of sacrifice'
     },
 
-    14: { // Death
+    14: {
+      name: 'Death',
       upright: 'End of cycle, beginnings, change, metamorphosis',
       reversed: 'Fear of change, holding on, stagnation'
     },
 
-    15: { // Temperance
+    15: {
+      name: 'Temperance',
       upright: 'Middle path, patience, finding meaning',
       reversed: 'Extremes, excess, lack of balance'
     },
 
-    16: { // The Devil
+    16: {
+      name: 'The Devil',
       upright: 'The Unacknowledged, addiction, materialism, playfulness',
       reversed: 'Realisation, freedom, release, restoring control'
     },
 
-    17: { // The Tower
+    17: {
+      name: 'The Tower',
       upright: 'Sudden upheaval, broken pride, disaster',
       reversed: 'Disaster avoided, delayed disaster, fear of suffering'
     },
 
-    18: { // The Star
+    18: {
+      name: 'The Star',
       upright: 'Hope, guidance, faith, rejuvenation',
       reversed: 'Faithlessness, being lost, discouragement, insecurity'
     },
 
-    19: { // The Moon
+    19: {
+      name: 'The Moon',
       uprighth: 'Unconsciousness, illusions, intuition',
       reversed: 'Confusion, fear, misinterpretation'
     },
 
-    20: { // The Sun
+    20: {
+      name: 'The Sun',
       upright: 'Joy, success, celebration, positivity',
       reversed: 'Negativity, depression, sadness'
     },
 
-    21: { // The Judgement
+    21: {
+      name: 'The Judgement',
       upright: 'Reflection, reckoning, awakening',
       reversed: 'Lack of self awareness, doubt, self loathing'
     },
 
-    22: { // The World
+    22: {
+      name: 'The World',
       upright: 'Fulfillment, creation, harmony, completion',
       reversed: 'Incompletion, stagnation, disharmony, no closure'
     }
@@ -523,10 +554,10 @@ const tarotDeck = {
     12: 'Knight',
     13: 'Queen',
     14: 'King',
-    r: 'Rods',
-    c: 'Cogs',
-    s: 'Sharp',
-    b: 'Blades'
+    rods: 'Rods',
+    cogs: 'Cogs',
+    sharp: 'Sharp',
+    blades: 'Blades'
   },
 
   majorNames: {
@@ -610,6 +641,18 @@ const tarotDeck = {
     stdout.write(lineOmnissiah + '\n')
     console.log(this.horisontalLine())
   },
+  /**
+   * Writes footer to console.
+   */
+  displayFooter () {
+    stdout.cursorTo(0, this.settings.terminalHeight - 3)
+    stdout.write(this.horisontalLine())
+    const bottomLine = '01001111 01101101 01101110 01101001 01110011 01110011 01101001 01100001 01101000 00100000 01100010 01100101 00100000 01110000 01110010 01100001 01101001 01110011 01100101 00100001'
+    stdout.cursorTo(Math.floor((this.settings.terminalWidth - (bottomLine.length)) / 2), this.settings.terminalHeight - 2)
+    stdout.write(bottomLine)
+    stdout.cursorTo(0, this.settings.terminalHeight - 1)
+    console.log(this.horisontalLine())
+  },
 
   /**
    * Get a commandstring from user.
@@ -618,7 +661,7 @@ const tarotDeck = {
    * @returns {string} inputLine - returnstring.
    */
   getCommand (question) {
-    stdout.cursorTo(0, this.settings.terminalHeight)
+    stdout.cursorTo(Math.floor((this.settings.terminalWidth - question.length) / 2), this.settings.terminalHeight - 6)
     const inputLine = readlineSync.question(question)
     console.log(inputLine)
     return inputLine
@@ -709,25 +752,95 @@ const tarotDeck = {
    */
   writeCardContent (x, y, pulledCard) {
     let cardSuit = ''
+    let cardSuitIcon = ''
     let card = 0
+    let turned = ''
     if (pulledCard >= 1 && pulledCard <= 14) { // is the random card from rods?
-      cardSuit = '|'
+      cardSuit = 'rods'
+      cardSuitIcon = '|'
       card = pulledCard
     }
 
     if (pulledCard >= 15 && pulledCard <= 28) { // is the random card from cogs?
-      cardSuit = '☼'
+      cardSuit = 'cogs'
+      cardSuitIcon = '☼'
       card = pulledCard % 14
     }
 
     if (pulledCard >= 29 && pulledCard <= 42) { // is the random card from sharp?
-      cardSuit = '#'
+      cardSuit = 'sharp'
+      cardSuitIcon = '#'
       card = pulledCard % 14
     }
 
     if (pulledCard >= 43 && pulledCard <= 56) { // is the random card from blades?
-      cardSuit = '/'
+      cardSuit = 'blades'
+      cardSuitIcon = '/'
       card = pulledCard % 14
+    }
+    if (card === 0) {
+      card = 14
+    }
+
+    // get full cardname, minor or major arcana?
+    let cardName = ''
+    if (pulledCard <= 56) { // minor
+      cardName = this.minorNames[card] + ' of ' + this.minorNames[cardSuit]
+    } else { // major
+      cardSuit = 'majorArcana'
+      card = pulledCard - 56
+      cardName = this.majorArcana[card].name
+    }
+    if (Math.random() <= 0.49999999) {
+      turned = 'upright'
+    } else {
+      turned = 'reversed'
+    }
+    cardName += ' - ' + turned
+
+    // get to location for cardname and write
+    stdout.cursorTo(x + Math.floor((this.settings.cardsWidth - cardName.length) / 2) + 1, y + 1)
+    stdout.write(cardName)
+
+    // get to location for Top Icons and write
+    stdout.cursorTo(x + 3, y + 3)
+    if (pulledCard > 56) { // if from the major arcana, use that template.
+      stdout.write(this.cardsTemplate.Major.top)
+    } else {
+      stdout.write(this.cardsTemplate[card].top.replaceAll('x', cardSuitIcon))
+    }
+
+    // get to location for Center Icons and write
+    if (pulledCard > 56) { // if from the major arcana, use that template.
+      stdout.cursorTo(x + Math.ceil(this.settings.cardsWidth / 2) - 3, y + Math.ceil(this.settings.cardsHeight / 2) - 2)
+      stdout.write(this.cardsTemplate.Major.special1)
+      stdout.cursorTo(x + Math.ceil(this.settings.cardsWidth / 2) - 3, y + Math.ceil(this.settings.cardsHeight / 2))
+      stdout.write(this.cardsTemplate.Major.special2)
+      stdout.cursorTo(x + Math.ceil(this.settings.cardsWidth / 2) - 3, y + Math.ceil(this.settings.cardsHeight / 2) + 2)
+      stdout.write(this.cardsTemplate.Major.special3)
+    } else {
+      stdout.cursorTo(x + Math.ceil((this.settings.cardsWidth / 2) - (this.cardsTemplate[card].center.length / 2)), y + Math.ceil(this.settings.cardsHeight / 2))
+      stdout.write(this.cardsTemplate[card].center.replaceAll('x', cardSuitIcon))
+    }
+
+    // get to location for Bottom Icons and write
+    stdout.cursorTo(x, y + this.settings.cardsHeight - 3)
+    if (pulledCard > 56) { // if from the major arcana, use that template.
+      readline.moveCursor(stdout, (this.settings.cardsWidth - this.cardsTemplate.Major.bottom.length - 2), 0)
+      stdout.write(this.cardsTemplate.Major.bottom)
+    } else {
+      readline.moveCursor(stdout, (this.settings.cardsWidth - this.cardsTemplate[card].bottom.length - 2), 0)
+      stdout.write(this.cardsTemplate[card].top.replaceAll('x', cardSuitIcon))
+    }
+
+    // get to location of description and write
+    stdout.cursorTo(x, y + this.settings.cardsHeight + 3)
+    stdout.write('Meaning :')
+    stdout.cursorTo(x, y + this.settings.cardsHeight + 4)
+    try {
+      stdout.write(this[cardSuit][card][turned])
+    } catch (error) {
+      console.error(`Error : trying to located ${card}, ${cardSuit}, ${turned}`)
     }
   },
 
@@ -750,9 +863,18 @@ const tarotDeck = {
   displayCardOfTheDay () {
     this.pullCards(1)
     this.writeCard(Math.floor((this.settings.terminalWidth - this.settings.cardsWidth) / 2), 10, this.pulledCards[0])
+  },
+  /**
+   * Writes one random card centerscreen.
+   *
+   */
+  debuggTestAll () {
+    this.pulledCards = []
+    for (let i= 1; i <= 78; i++) {
+      this.writeCard(Math.floor((this.settings.terminalWidth - this.settings.cardsWidth) / 2), 10, i)
+    }
   }
 }
-
 /**
  * The programs main-function.
  */
@@ -766,6 +888,7 @@ function main () {
     console.clear()
     tarotDeck.applySettings()
     tarotDeck.displayHeader()
+    tarotDeck.displayFooter()
     if (commandLine.toLowerCase === 'card of the day' || commandLine === '1') {
       tarotDeck.displayCardOfTheDay()
     }
@@ -775,6 +898,10 @@ function main () {
 
     if (commandLine.toLowerCase === 'settings' || commandLine === '3') {
       tarotDeck.editSettings()
+    }
+
+    if (commandLine.toLowerCase === 'secrettest') {
+      tarotDeck.debuggTestAll()
     }
     commandLine = tarotDeck.getCommand('Enter selected command function (1:card of the day, 2:three card spread, 3:settings, 4:exit)?\n')
   }
