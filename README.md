@@ -23,7 +23,9 @@ Obs. for entertainment and educational purpose only! I take no resposibility for
 - [] Music?
 
 ## Authors and acknowledgment
-Sir Terry Pratchett.
+ॐ नमः शिवाय
+Sir Terry Pratchett, becuase Terry should always be acknowledged.
+Douglas Adams, becuase Douglas should always be acknowledged.
 The Omnissiah is from the 40k universe and are the ip of Games Workshop Limited.
 
 ## License
