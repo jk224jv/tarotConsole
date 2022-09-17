@@ -701,20 +701,25 @@ const tarotDeck = {
     console.clear()
     this.displayHeader()
   },
+
   /**
    * Displays exit dialog.
    *
    */
   displayExitBlessing () {
-    const exitBlessing = '++ May the machinespirit process your code true and your functions be pure. ++'
-    console.log()
-    readline.moveCursor(stdout, Math.ceil((tarotDeck.settings.terminalWidth / 2) - (exitBlessing.length / 2)), 2)
-    console.info(exitBlessing)
+    console.clear()
+    const exitBlessing = ['++ May the machinespirit correctly preform your computations and your functions be pure. ++', '', '════════════════════════════════════════', 'The Omnissiah\´s tarot', 'by', 'Jimmy Karlsson', 'codesmith - junior apprentice grade', 'Schoolarium : Linnéuniversitetet', 'Holy Terra', '════════════════════════════════════════', '', '++ Praise the Omnissiah! ++']
+    for (let i = 0; i < exitBlessing.length; i++) {
+      stdout.cursorTo(Math.floor((this.settings.terminalWidth / 2) - (exitBlessing[i].length / 2)), Math.floor((this.settings.terminalHeight / 2) - Math.floor(exitBlessing.length / 2) + i))
+      stdout.write(exitBlessing[i])
+    }
 
     // at end of program return console settings to normal
     console.log('\x1b[0m')
+    stdout.cursorTo(0, this.settings.terminalHeight)
     rl.close()
   },
+
   /**
    * Write a tarot card outer frame at cordinates.
    *
@@ -856,6 +861,7 @@ const tarotDeck = {
     this.writeCardFrame(x, y)
     this.writeCardContent(x, y, pulledCard)
   },
+
   /**
    * Writes one random card centerscreen.
    *
@@ -864,6 +870,19 @@ const tarotDeck = {
     this.pullCards(1)
     this.writeCard(Math.floor((this.settings.terminalWidth - this.settings.cardsWidth) / 2), 10, this.pulledCards[0])
   },
+
+  /**
+   * Writes three random card centerscreen.
+   *
+   */
+  displayThreeCardSpread () {
+    this.pullCards(3)
+  for (let i= 0; i < this.pulledCards.length; i++) {
+    this.writeCard(Math.floor((this.settings.terminalWidth - this.settings.cardsWidth) / 2), 10, this.pulledCards[i])
+  }
+    
+  },
+
   /**
    * Writes all cards for debugging centerscreen.
    *
@@ -876,6 +895,7 @@ const tarotDeck = {
     }
   }
 }
+
 /**
  * The programs main-function.
  */
