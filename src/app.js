@@ -865,7 +865,7 @@ const tarotDeck = {
     this.writeCard(Math.floor((this.settings.terminalWidth - this.settings.cardsWidth) / 2), 10, this.pulledCards[0])
   },
   /**
-   * Writes one random card centerscreen.
+   * Writes all cards for debugging centerscreen.
    *
    */
   debuggTestAll () {
