@@ -1,28 +1,33 @@
-# the-omnissiahs-tarot
-
-
+# the Omnissiah´s tarot
 
 ## a Training with using objects
-
-As a practice with the use of objects in javascript I'm writing this terminal based tarotreader.
+As a practice with the use of objects in javascript I have written this terminal based tarotreader.
 
 ## Installation
-NPM install, required to be run after clone.
+- 1 Clone into a local folder using $ git clone
+- 2 Run $ npm install
 
 ## Usage
-for fun and educational purpose only.
+Run in a maximized terminal window, such as cmd.com or powershell.
+Run using $ npm start
+
+Obs. for entertainment and educational purpose only! I take no resposibility for the predictions made.
 
 ## Roadmap
-- [] Make a grid in the terminal window.
-- [] Have a complete set of 78 tarot cards stored as an object.
-- [] Have the terminal show a basic 3 card spread.
-- [] Add a method to interpret the cards.
+- [x] Make a grid in the terminal window.
+- [x] Have a complete set of 78 tarot cards stored as an object.
+- [x] Have the terminal show a basic 3 card spread.
+- [x] Add a method to interpret the cards.
+- [] (Better) graphics
+- [] As a webservice?
+- [] Music?
 
 ## Authors and acknowledgment
-Sir Terry Pratchett
+Sir Terry Pratchett.
+The Omnissiah is from the 40k universe and are the ip of Games Workshop Limited.
 
 ## License
 MIT
 
 ## Project status
-Very early development. Project is being scetched out.
+Project is functional.
