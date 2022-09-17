@@ -870,8 +870,9 @@ const tarotDeck = {
    */
   debuggTestAll () {
     this.pulledCards = []
-    for (let i= 1; i <= 78; i++) {
+    for (let i = 1; i < 79; i++) {
       this.writeCard(Math.floor((this.settings.terminalWidth - this.settings.cardsWidth) / 2), 10, i)
+      // this.getCommand()
     }
   }
 }
@@ -884,26 +885,27 @@ function main () {
   tarotDeck.displayHeader()
 
   let commandLine = ''
-  while (commandLine.toLowerCase !== 'exit' && commandLine !== '4') {
+  while (commandLine !== 'exit' && commandLine !== '4') {
     console.clear()
     tarotDeck.applySettings()
     tarotDeck.displayHeader()
     tarotDeck.displayFooter()
-    if (commandLine.toLowerCase === 'card of the day' || commandLine === '1') {
+    if (commandLine === 'card of the day' || commandLine === '1') {
       tarotDeck.displayCardOfTheDay()
     }
-    if (commandLine.toLowerCase === 'three card standard' || commandLine === '2') {
+    if (commandLine === 'three card standard' || commandLine === '2') {
       tarotDeck.displayThreeCardSpread()
     }
 
-    if (commandLine.toLowerCase === 'settings' || commandLine === '3') {
+    if (commandLine === 'settings' || commandLine === '3') {
       tarotDeck.editSettings()
     }
 
-    if (commandLine.toLowerCase === 'secrettest') {
+    if (commandLine === 'secrettest') {
       tarotDeck.debuggTestAll()
     }
     commandLine = tarotDeck.getCommand('Enter selected command function (1:card of the day, 2:three card spread, 3:settings, 4:exit)?\n')
+    commandLine = commandLine.toLowerCase()
   }
 
   tarotDeck.displayExitBlessing()
