@@ -662,6 +662,7 @@ const tarotDeck = {
    */
   getCommand (question) {
     stdout.cursorTo(Math.floor((this.settings.terminalWidth - question.length) / 2), this.settings.terminalHeight - 6)
+    stdout.clearLine()
     const inputLine = readlineSync.question(question)
     console.log(inputLine)
     return inputLine
@@ -700,6 +701,7 @@ const tarotDeck = {
     this.applySettings()
     console.clear()
     this.displayHeader()
+    this.displayFooter()
   },
 
   /**
@@ -708,7 +710,7 @@ const tarotDeck = {
    */
   displayExitBlessing () {
     console.clear()
-    const exitBlessing = ['++ May the machinespirit correctly preform your computations and your functions be pure. ++', '', '════════════════════════════════════════', 'The Omnissiah\´s tarot', 'by', 'Jimmy Karlsson', 'codesmith - junior apprentice grade', 'Schoolarium : Linnéuniversitetet', 'Holy Terra', '════════════════════════════════════════', '', '++ Praise the Omnissiah! ++']
+    const exitBlessing = ['++ May the machinespirit correctly preform your computations and your functions be pure. ++', '', '════════════════════════════════════════', 'The Omnissiah´s tarot', 'by', 'Jimmy Karlsson', 'codesmith - junior apprentice grade', 'Schoolarium : Linnéuniversitetet', 'Holy Terra', '════════════════════════════════════════', '', '++ Praise the Omnissiah! ++']
     for (let i = 0; i < exitBlessing.length; i++) {
       stdout.cursorTo(Math.floor((this.settings.terminalWidth / 2) - (exitBlessing[i].length / 2)), Math.floor((this.settings.terminalHeight / 2) - Math.floor(exitBlessing.length / 2) + i))
       stdout.write(exitBlessing[i])
@@ -877,10 +879,11 @@ const tarotDeck = {
    */
   displayThreeCardSpread () {
     this.pullCards(3)
-  for (let i= 0; i < this.pulledCards.length; i++) {
-    this.writeCard(Math.floor((this.settings.terminalWidth - this.settings.cardsWidth) / 2), 10, this.pulledCards[i])
-  }
-    
+    const xOrigin = Math.floor(this.settings.terminalWidth / 3) - Math.floor(this.settings.cardsWidth / 2)
+    const xDistance = Math.floor(this.settings.terminalWidth / 3)
+    for (let i = 0; i < this.pulledCards.length; i++) {
+      this.writeCard((xOrigin + (xDistance * i)), 10, this.pulledCards[i])
+    }
   },
 
   /**
@@ -901,8 +904,6 @@ const tarotDeck = {
  */
 function main () {
   console.clear()
-  tarotDeck.applySettings()
-  tarotDeck.displayHeader()
 
   let commandLine = ''
   while (commandLine !== 'exit' && commandLine !== '4') {
