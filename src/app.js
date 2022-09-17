@@ -879,8 +879,8 @@ const tarotDeck = {
    */
   displayThreeCardSpread () {
     this.pullCards(3)
-    const xOrigin = Math.floor(this.settings.terminalWidth / 3) - Math.floor(this.settings.cardsWidth / 2)
-    const xDistance = Math.floor(this.settings.terminalWidth / 3)
+    const xOrigin = Math.floor(this.settings.terminalWidth / 4) - Math.floor(this.settings.cardsWidth / 2)
+    const xDistance = Math.floor(this.settings.terminalWidth / 4)
     for (let i = 0; i < this.pulledCards.length; i++) {
       this.writeCard((xOrigin + (xDistance * i)), 10, this.pulledCards[i])
     }
