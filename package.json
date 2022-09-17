@@ -1,7 +1,7 @@
 {
   "name": "the_omnissiahs_tarot",
   "version": "1.0.0",
-  "description": "The Omnissiahs tarot",
+  "description": "The Omnissiah´s tarot",
   "type": "module",
   "main": "src/app.js",
   "scripts": {
