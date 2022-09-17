@@ -756,12 +756,18 @@ const tarotDeck = {
    * @param {number} x - TopLeft corner of card.
    * @param {number} y - TopLeft corner of card.
    * @param {number} pulledCard - selects what card to write out.
+   * @param {string} significance - what does the card reprecent?
    */
-  writeCardContent (x, y, pulledCard) {
+  writeCardContent (x, y, pulledCard, significance) {
     let cardSuit = ''
     let cardSuitIcon = ''
     let card = 0
     let turned = ''
+
+    // get position of card significance and write
+    stdout.cursorTo(x + Math.floor((this.settings.cardsWidth / 2) - (significance.length / 2)), y - 3)
+    stdout.write(significance)
+
     if (pulledCard >= 1 && pulledCard <= 14) { // is the random card from rods?
       cardSuit = 'rods'
       cardSuitIcon = '|'
@@ -857,11 +863,12 @@ const tarotDeck = {
    * @param {number} x - x TopLeft corner of card
    * @param {number} y - y TopLeft corner of card
    * @param {number} pulledCard - selects what card to write out.
+   * @param {string} significance - what does the card reprecent?
    */
-  writeCard (x, y, pulledCard) {
+  writeCard (x, y, pulledCard, significance = 'Card of the day') {
     stdout.cursorTo(x, y)
     this.writeCardFrame(x, y)
-    this.writeCardContent(x, y, pulledCard)
+    this.writeCardContent(x, y, pulledCard, significance)
   },
 
   /**
@@ -879,10 +886,11 @@ const tarotDeck = {
    */
   displayThreeCardSpread () {
     this.pullCards(3)
+    const significance = ['The Past', 'The Present', 'The Future']
     const xOrigin = Math.floor(this.settings.terminalWidth / 4) - Math.floor(this.settings.cardsWidth / 2)
     const xDistance = Math.floor(this.settings.terminalWidth / 4)
     for (let i = 0; i < this.pulledCards.length; i++) {
-      this.writeCard((xOrigin + (xDistance * i)), 10, this.pulledCards[i])
+      this.writeCard((xOrigin + (xDistance * i)), 10, this.pulledCards[i], significance[i])
     }
   },
 
