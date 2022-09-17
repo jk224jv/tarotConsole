@@ -628,7 +628,7 @@ const tarotDeck = {
    */
   displayHeader () {
     console.log(this.horisontalLine())
-    const topLine = ['Dataloom : XIVI', 'Planet : Holy Terra', 'Schoolar : Linnéuniversitetet', '++ Cogitator 01 ++\n']
+    const topLine = ['Dataloom : XIVI', 'Planet : Holy Terra', 'Schoolarium : Linnéuniversitetet', '++ Cogitator 01 ++\n']
     for (let i = 0; i < topLine.length; i++) {
       readline.moveCursor(stdout, Math.ceil(this.settings.terminalWidth / 7), 0)
       stdout.write(topLine[i])
