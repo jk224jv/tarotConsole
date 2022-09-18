@@ -608,8 +608,10 @@ const tarotDeck = {
    */
   applySettings () {
     console.log(`\x1b[4${tarotDeck.settings.backgroundColor}m \x1b[3${tarotDeck.settings.textColor}m \x1b[${tarotDeck.settings.textBrightness + 1}m`)
-    tarotDeck.settings.terminalWidth = process.stdout.columns
-    tarotDeck.settings.terminalHeight = process.stdout.rows
+    this.settings.terminalWidth = process.stdout.columns
+    this.settings.terminalHeight = process.stdout.rows
+    this.settings.cardsWidth = Math.floor(this.settings.terminalWidth / 7)
+    this.settings.cardsHeight = (this.settings.terminalHeight - 26)
   },
 
   /**
@@ -627,6 +629,7 @@ const tarotDeck = {
    * Writes header to console.
    */
   displayHeader () {
+    stdout.cursorTo(0, 0)
     console.log(this.horisontalLine())
     const topLine = ['Dataloom : XIVI', 'Planet : Holy Terra', 'Schoolarium : Linnéuniversitetet', '++ Cogitator 01 ++\n']
     for (let i = 0; i < topLine.length; i++) {
@@ -812,7 +815,7 @@ const tarotDeck = {
     cardName += ' - ' + turned
 
     // get to location for cardname and write
-    stdout.cursorTo(x + Math.floor((this.settings.cardsWidth - cardName.length) / 2) + 1, y + 1)
+    stdout.cursorTo(x + Math.floor((this.settings.cardsWidth - cardName.length) / 2) + 1, y - 1)
     stdout.write(cardName)
 
     // get to location for Top Icons and write
@@ -890,7 +893,7 @@ const tarotDeck = {
     const xOrigin = Math.floor(this.settings.terminalWidth / 4) - Math.floor(this.settings.cardsWidth / 2)
     const xDistance = Math.floor(this.settings.terminalWidth / 4)
     for (let i = 0; i < this.pulledCards.length; i++) {
-      this.writeCard((xOrigin + (xDistance * i)), 10, this.pulledCards[i], significance[i])
+      this.writeCard((xOrigin + (xDistance * i)), (10 + (2 * (i % 2))), this.pulledCards[i], significance[i])
     }
   },
 
@@ -911,8 +914,6 @@ const tarotDeck = {
  * The programs main-function.
  */
 function main () {
-  console.clear()
-
   let commandLine = ''
   while (commandLine !== 'exit' && commandLine !== '4') {
     console.clear()
