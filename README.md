@@ -1,5 +1,7 @@
 # the Omnissiah´s tarot
 
+<img src="screenshot.png">
+
 ## a Training with using objects
 As a practice with the use of objects in javascript I have written this terminal based tarotreader.
 
@@ -18,18 +20,22 @@ Obs. for entertainment and educational purpose only! I take no resposibility for
 - [x] Have a complete set of 78 tarot cards stored as an object.
 - [x] Have the terminal show a basic 3 card spread.
 - [x] Add a method to interpret the cards.
-- [] (Better) graphics
-- [] As a webservice?
-- [] Music?
+- [ ] (Better) graphics
+- [ ] As a webservice?
+- [ ] Music?
 
 ## Authors and acknowledgment
-ॐ नमः शिवाय
-Sir Terry Pratchett, becuase Terry should always be acknowledged.
-Douglas Adams, becuase Douglas should always be acknowledged.
-The Omnissiah is from the 40k universe and are the ip of Games Workshop Limited.
+
+- ॐ नमः शिवाय
+- Sir Terry Pratchett, becuase Terry should always be acknowledged.
+- Douglas Adams, becuase Douglas should always be acknowledged.
+- The Omnissiah is from the 40k universe and are the ip of Games Workshop Limited.
 
 ## License
 MIT
 
 ## Project status
 Project is functional.
+
+## Bugs and support
+Please contact me throught discord, slack or student email. In that prefered order.
