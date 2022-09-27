@@ -629,7 +629,7 @@ const tarotDeck = {
    * Writes header to console.
    */
   displayHeader () {
-    stdout.cursorTo(0, 0)
+    stdout.cursorTo(0, 1)
     console.log(this.horisontalLine())
     const topLine = ['Dataloom : XIVI', 'Planet : Holy Terra', 'Schoolarium : Linnéuniversitetet', '++ Cogitator 01 ++\n']
     for (let i = 0; i < topLine.length; i++) {
@@ -941,4 +941,8 @@ function main () {
   tarotDeck.displayExitBlessing()
 }
 
-main()
+if (!process.stdout.isTTY) {
+  throw new Error('This program require a TTY compatable terminal.\n Please use NodeJs Command Terminal, Windows Powershell or equalent.')
+} else {
+  main()
+}

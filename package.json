@@ -4,6 +4,11 @@
   "description": "The Omnissiah´s tarot",
   "type": "module",
   "main": "src/app.js",
+  "bin": "src/app.js",
+  "pkg": {
+    "assets": [ "node_modules/**/*", "src/**/*" ],
+    "target": [ "node18-win-x64" ]
+  },
   "scripts": {
     "start": "node src/app.js",
     "lint": "npx eslint ./src || exit 0",
