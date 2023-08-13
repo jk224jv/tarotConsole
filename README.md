@@ -15,14 +15,6 @@ Run using $ npm start
 
 Obs. for entertainment and educational purpose only! I take no resposibility for the predictions made.
 
-## Roadmap
-- [x] Make a grid in the terminal window.
-- [x] Have a complete set of 78 tarot cards stored as an object.
-- [x] Have the terminal show a basic 3 card spread.
-- [x] Add a method to interpret the cards.
-- [ ] (Better) graphics
-- [ ] As a webservice?
-- [ ] Music?
 
 ## Authors and acknowledgment
 
